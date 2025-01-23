@@ -1,4 +1,4 @@
--- Active: 1728126369033@@127.0.0.1@3306@sqllearning
+-- Active: 1728126369033@@127.0.0.1@3306@zomato
 USE sqllearning;
 select * from `movies (1)`;
 
