@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Replace with your Gemini API key
-API_KEY = 'AIzaSyDmQO9Om2tbHvD4aAq3OJQtkFMtMoeIlOA'
+API_KEY = 'your -api -key'
 API_URL = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={API_KEY}'
 
 # Function to get Gemini's response
