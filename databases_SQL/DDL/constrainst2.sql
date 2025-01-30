@@ -9,7 +9,7 @@ INSERT INTO students (student_id, name, age) VALUES (122, "swayam", 24);
 INSERT INTO students (student_id, name, age) VALUES (122, "swayam", 26); -- violates the condition
 
 -- ------------------------------ DEFAULT ------------------------------------------------------------
-CREATE TABLE customers(
+
 CREATE TABLE ticket (
 ticket_id INT PRIMARY KEY,
 name VARCHAR(256) NOT NULL,
