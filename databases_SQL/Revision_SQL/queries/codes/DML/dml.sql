@@ -43,4 +43,47 @@ SELECT model,brand_name,ram_capacity FROM smartphones_cleaned_v6 WHERE brand_nam
 -- Q10. Find all phones with snapdragon processor
 SELECT model FROM smartphones_cleaned_v6 WHERE processor_brand="snapdragon" AND brand_name="samsung";
 
--- Q11. 
+-- Q11. Find brands who sell phones with price > 50000
+SELECT DISTINCT(brand_name) FROM smartphones_cleaned_v6 WHERE price > 50000;
+
+-- Q12. IN and NOT IN 
+SELECT DISTINCT(brand_name) FROM smartphones_cleaned_v6 WHERE processor_brand IN ("exynos","snapdragon","bionic");
+
+
+----------------------------------------------------------------UPDATE-----------------------------------------------------------------------------------------------------
+-- Q13. Update processor_name to mediatek wherever it is dimensity
+UPDATE smartphones_cleaned_v6 SET processor_brand ="Mediatek" WHERE processor_brand ="dimensity";
+
+----------------------------------------------------------------DELETE-----------------------------------------------------------------------------------------------------
+DELETE FROM smartphones_cleaned_v6 WHERE price > 200000;
+
+DELETE FROM smartphones_cleaned_v6 WHERE primary_camera_rear > 100;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------Functions---------------------------------------------------------------------------------------------------
+
+-- SQL Functions
+
+-- 1. Built-In Functions
+-- 2. User-Defined Functions
+
+-- Q15. Max Function
+SELECT max(price) FROM smartphones_cleaned_v6;
+
+-- Q16. Min Function
+SELECT min(price) FROM smartphones_cleaned_v6;
+
+-- Q17. Select Samsung model with maximum price
+SELECT model, price FROM smartphones_cleaned_v6 WHERE brand_name = "Samsung" ORDER BY price DESC LIMIT 1;
+
+-- Q18. Find the no of oneplus phones
+SELECT count(*) FROM smartphones_cleaned_v6 WHERE brand_name = "apple";
+
+-- Q19. Find no of brands
+SELECT COUNT(DISTINCT(processor_brand)) FROM smartphones_cleaned_v6;
+
+-- Q20. Variance of Screen Size 
+SELECT VARIANCE(screen_size) FROM smartphones_cleaned_v6;
+
+-- Q21.
+SELECT ROUND(AVG(battery_capacity)),ROUND(AVG(primary_camera_rear)) FROM smartphones_cleaned_v6 WHERE price >= 100000;

@@ -1,0 +1,3 @@
+From ---> Join ---> Where ---> Group By ---> Having ---> Select ---> Distinct ---> Order By
+
+alter works on columns , delete or update work on rows
