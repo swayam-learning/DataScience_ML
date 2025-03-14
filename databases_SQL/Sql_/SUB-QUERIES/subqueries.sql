@@ -1,4 +1,4 @@
--- Active: 1728126369033@@127.0.0.1@3306@zomato
+-- Active: 1740077526153@@127.0.0.1@3306@sqllearning
 USE sqllearning;
 select * from `movies (1)`;
 
@@ -35,7 +35,7 @@ SELECT * FROM orders;
 -- Q1. Find all the users who never ordered
 SELECT * FROM users WHERE user_id NOT IN(SELECT DISTINCT(user_id) FROM orders);
 -- Q2. Find all the movies made by top3 directors (in terms of total gross income)
-
+use sqllearning;
 WITH top_directors AS (SELECT director  FROM `movies (1)` GROUP BY director ORDER BY SUM(gross) DESC LIMIT 3)
 SELECT * FROM `movies (1)` WHERE director IN (SELECT * FROM top_directors);
 -- limit was not supported in this verison of mysql so we had to move to cte

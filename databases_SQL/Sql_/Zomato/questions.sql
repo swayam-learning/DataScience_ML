@@ -20,7 +20,11 @@ SELECT * FROM orders WHERE restaurant_rating IS NULL;
 UPDATE orders  SET restaurant_rating = NULL WHERE restaurant_rating = 0;
 
 -- Q5. Find number of orders placed bye each customer
-SELECT u1.name,COUNT(o1.order_id) AS total_order  FROM orders o1 JOIN users u1 ON u1.user_id = o1.user_id GROUP BY o1.user_id;
+
+SELECT u1.name, COUNT(o1.order_id) AS total_order
+FROM orders o1
+JOIN users u1 ON u1.user_id = o1.user_id
+GROUP BY u1.name;
 
 -- Q6 find restaurant with most number of menu items
 SELECT r1.r_name,COUNT(m1.menu_id) as total_no_of_items 
@@ -36,18 +40,22 @@ avg_rating FROM orders o1
 JOIN restaurants r1 ON o1.r_id = r1.r_id 
 GROUP BY r1.r_name ORDER BY avg_rating DESC;
 
---Q8. Find the food that is being sold at most number of restaurants
-SELECT t2.f_name , COUNT (*) FROM menu t1 JOIN food t2 ON t1.f_id=t2.f_id
-GROUP BY t1.f_id ORDER BY COUNT(*) DESC LIMIT 1;
-
+--Q8. Find the food that is being sold at most number of restaurantsSELECT t2.f_name, COUNT(*) AS count
+SELECT t2.f_name, COUNT(*) AS count
+FROM menu t1
+JOIN food t2 ON t1.f_id = t2.f_id
+GROUP BY t2.f_name
+ORDER BY count DESC
+LIMIT 1;
 --Q9.Find restaurant with max revenue in a given month
 -- SELECT  MONTH(DATE(date)) ,date FROM orders;
-SELECT t2.r_name,SUM(t1.amount) AS amount FROM orders t1
-JOIN restaurants t2
-ON t1.r_id = t2.r_id
-WHERE MONTH(DATE(date)) = 5
-GROUP BY t1.r_id
+SELECT t2.r_name, SUM(t1.amount) AS amount
+FROM orders t1
+JOIN restaurants t2 ON t1.r_id = t2.r_id
+WHERE MONTH(t1.date) = 5
+GROUP BY t2.r_name
 ORDER BY amount DESC;
+
 
 -- Q10.how much does kfc earn in the month of june 
 SELECT t2.r_name,SUM(t1.amount) AS amount FROM orders t1
