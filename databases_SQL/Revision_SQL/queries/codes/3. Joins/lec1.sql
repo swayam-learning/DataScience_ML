@@ -1,0 +1,2 @@
+USE sqllearning;
+show tables;
