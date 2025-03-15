@@ -122,4 +122,101 @@ WHERE r1.r_name = 'kfc'
 GROUP BY MONTHNAME(o1.date), MONTH(o1.date)
 ORDER BY MONTH(o1.date);
 
--- Q12. 
+-- Q12. find restaurants with sales > x
+
+SELECT r1.r_id,r1.r_name,SUM(t1.amount) as `sales` from orders t1
+INNER JOIN restaurants r1
+ON r1.r_id = t1.r_id
+GROUP BY r_id
+HAVING `sales` > 2500;
+
+-- Q13. Find customers who have never ordered
+SELECT u1.user_id,name FROM users u1
+EXCEPT
+SELECT o1.user_id,name 
+FROM orders o1
+INNER JOIN users u2 ON o1.user_id=u2.user_id;
+
+-- Approach 2
+SELECT u1.user_id, u1.name
+FROM users u1
+LEFT JOIN orders o1 ON u1.user_id = o1.user_id
+WHERE o1.user_id IS NULL;
+
+
+-- Q14. Show details of a particular customer in a given date range
+
+SELECT o1.user_id,o1.order_id,f_name,`date` FROM orders o1
+JOIN order_details o2
+ON o1.order_id=o2.order_id
+JOIN food f1
+ON o2.f_id = f1.f_id
+WHERE user_id = 1 
+AND `date` BETWEEN '2022-05-15' AND '2022-06-15'; 
+
+
+-- ALTER TABLE order_details CHANGE r_id f_id INT; this was used to change column r_id to f_id
+
+-- Q15. Customers Favourite Food
+SELECT 
+    u.user_id,
+    u.name,
+    f.f_name AS favorite_food,
+    COUNT(*) AS order_count
+FROM 
+    users u
+JOIN 
+    orders o ON u.user_id = o.user_id
+JOIN 
+    order_details od ON o.order_id = od.order_id
+JOIN 
+    food f ON od.f_id = f.f_id
+GROUP BY 
+    u.user_id, f.f_name
+HAVING 
+    COUNT(*) = (
+        SELECT 
+            MAX(order_count)
+        FROM (
+            SELECT 
+                COUNT(*) AS order_count
+            FROM 
+                orders o2
+            JOIN 
+                order_details od2 ON o2.order_id = od2.order_id
+            WHERE 
+                o2.user_id = u.user_id
+            GROUP BY 
+                od2.f_id
+        ) AS subquery
+    );
+
+
+
+WITH RankedOrders AS (
+    SELECT 
+        u.user_id,
+        u.name,
+        f.f_name AS favorite_food,
+        COUNT(*) AS order_count,
+        ROW_NUMBER() OVER (PARTITION BY u.user_id ORDER BY COUNT(*) DESC) AS `rank`
+    FROM 
+        users u
+    JOIN 
+        orders o ON u.user_id = o.user_id
+    JOIN 
+        order_details od ON o.order_id = od.order_id
+    JOIN 
+        food f ON od.f_id = f.f_id
+    GROUP BY 
+        u.user_id, f.f_name
+)
+SELECT 
+    user_id,
+    name,
+    favorite_food,
+    order_count
+FROM 
+    RankedOrders
+WHERE 
+    `rank` = 1;
