@@ -51,6 +51,75 @@ HAVING `avg restaurant rating` > 2;
 
 
 -- Q9. Find food that is being sold most at restaurants
+-- SELECT f1.f_name AS `food name`,COUNT(f_name) AS `most sold food`
+-- FROM menu m1
+-- INNER JOIN restaurants r1
+-- ON m1.r_id=r1.r_id
+-- INNER JOIN food f1
+-- ON m1.f_id=f1.f_id
+-- GROUP BY f1.f_name
+-- ORDER BY `most sold food` DESC
+-- LIMIT 5;
 
 
+-- better way
+SELECT f_name,COUNT(*) AS `most sold` FROM menu m1
+JOIn food f1 ON m1.f_id = f1.f_id
+GROUP BY f_name
+ORDER BY `most sold` DESC
+LIMIT 5;
 
+
+-- Q10. find restaurant with max revenue in a given month
+
+SELECT r1.r_name,SUM(o1.amount) AS `revenue` FROM orders o1
+INNER JOIN restaurants r1
+ON o1.r_id = r1.r_id
+WHERE MONTHNAME(DATE(o1.date)) = 'may'
+GROUP BY r1.r_id
+ORDER BY `revenue` DESC LIMIT 1;
+
+-- Q11. Month by Month revenue geenerated by a restaurant
+
+-- 1st approach
+SELECT r1.r_name,MONTHNAME(DATE(o1.date)) AS `month name`,SUM(o1.amount) AS `revenue` 
+FROM orders o1
+INNER JOIN restaurants r1
+ON o1.r_id = r1.r_id
+WHERE r1.r_name= 'kfc'
+GROUP BY MONTHNAME(DATE(o1.`date`))
+ORDER BY MONTHNAME(DATE(o1.`date`));
+
+-- 2nd approach
+-- Pivot table
+SELECT 
+    r1.r_name,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'January' THEN o1.amount ELSE 0 END) AS `January`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'February' THEN o1.amount ELSE 0 END) AS `February`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'March' THEN o1.amount ELSE 0 END) AS `March`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'April' THEN o1.amount ELSE 0 END) AS `April`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'May' THEN o1.amount ELSE 0 END) AS `May`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'June' THEN o1.amount ELSE 0 END) AS `June`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'July' THEN o1.amount ELSE 0 END) AS `July`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'August' THEN o1.amount ELSE 0 END) AS `August`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'September' THEN o1.amount ELSE 0 END) AS `September`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'October' THEN o1.amount ELSE 0 END) AS `October`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'November' THEN o1.amount ELSE 0 END) AS `November`,
+    SUM(CASE WHEN MONTHNAME(o1.date) = 'December' THEN o1.amount ELSE 0 END) AS `December`
+FROM orders o1
+INNER JOIN restaurants r1 ON o1.r_id = r1.r_id
+WHERE r1.r_name = 'kfc'
+GROUP BY r1.r_name;
+
+-- 3rd approach
+SELECT 
+    r1.r_name,
+    MONTHNAME(o1.date) AS `month name`,
+    SUM(o1.amount) AS `revenue`
+FROM orders o1
+INNER JOIN restaurants r1 ON o1.r_id = r1.r_id
+WHERE r1.r_name = 'kfc'
+GROUP BY MONTHNAME(o1.date), MONTH(o1.date)
+ORDER BY MONTH(o1.date);
+
+-- Q12. 
