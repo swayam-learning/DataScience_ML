@@ -1,4 +1,4 @@
--- Active: 1740077526153@@127.0.0.1@3306@campusx_revise
+-- Active: 1740077526153@@127.0.0.1@3306@zomato
 use campusx_revise;
 show tables;
 
@@ -74,3 +74,8 @@ FROM marks;
 SELECT * ,
 CONCAT(branch,'-',ROW_NUMBER() OVER(PARTITION BY branch))
 FROM marks;
+
+
+-- Zomato
+use zomato;
+-- Q1. Find top 2 most paying customers of each month
