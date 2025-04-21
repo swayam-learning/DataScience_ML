@@ -1,0 +1,16 @@
+frame in a window function is a subset of rows within the partiti0ß that
+determines the scope of the window function calculation. The frame is defined
+using a combination of two clauses in the window function: ROWS and BETWEEN.
+The ROWS clause specifies how many rows should be included in the frame
+relative to the current row. For example, ROWS 3 PRECEDING means that the
+frame includes the current row and the three rows that precede it in the partition.
+The BETWEEN clause specifies the boundaries of the frame.
+Examples
+• ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW - means that the
+frame includes all rows from the beginning of the partition up to and including the
+current row.
+• ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING: the frame includes the
+current row and the row immediately before and after it.
+• ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING: the
+frame includes all rows in the partition.
+• ROWS BETWEEN 3 PRECEDING AND 2 FOLLOWING: the frame includes the
