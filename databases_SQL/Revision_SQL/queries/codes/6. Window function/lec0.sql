@@ -76,7 +76,7 @@ SELECT name,branch,marks FROM(SELECT *,
         OVER(PARTITION BY branch ORDER BY marks DESC ROWS BETWEEN UNBOUNDED PRECEDING and UNBOUNDED FOLLOWING) AS "laster_marks"
         FROM marks) t1
 WHERE t1.name = laster_name;
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Alternate way to write window functions
 
 SELECT name, branch, marks
@@ -92,7 +92,7 @@ FROM (
 ) t1
 WHERE t1.name = laster_name;
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Lead & Lag
 SELECT *, LAG(marks) OVER(PARTITION BY branch ORDER BY student_id),
 LEAD(marks) OVER(PARTITION BY branch ORDER BY student_id)
@@ -125,3 +125,4 @@ SELECT
 FROM monthly_sales
 ORDER BY month_num;
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
