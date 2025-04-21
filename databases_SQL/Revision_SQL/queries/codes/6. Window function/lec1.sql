@@ -51,7 +51,7 @@ SELECT * FROM (SELECT *,AVG(marks)
                OVER(PARTITION BY branch) AS "branch_avg" 
                FROM marks) t 
 WHERE t.marks > branch_avg;
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Rank Function/Dense Rank/ Row_number
 
 SELECT  *, RANK() 
@@ -78,4 +78,26 @@ FROM marks;
 
 -- Zomato
 use zomato;
+show tables;
 -- Q1. Find top 2 most paying customers of each month
+
+SELECT user_id,amount ,RANK() OVER(ORDER BY amount DESC) 
+FROM orders WHERE user_id in (SELECT t1.user_id FROM orders t1)
+LIMIT 2;
+
+
+SELECT * FROM(SELECT MONTHNAME(date) as month,user_id,SUM(amount) as total,
+            RANK() OVER(PARTITION BY MONTHNAME(`date`) ORDER BY SUM(amount) DESC) as month_rank
+            FROM orders
+            GROUP BY MONTHNAME(date),user_id
+            ORDER BY MONTHNAME(date)) t 
+WHERE t.`month_rank`<3
+ORDER BY month DESC , month_rank ASC;
+
+SELECT MONTHNAME(date) as month,user_id,SUM(amount) as total,
+            RANK() OVER(PARTITION BY MONTHNAME(`date`) ORDER BY SUM(amount) DESC) as month_rank
+            FROM orders
+            GROUP BY MONTHNAME(date),user_id
+            ORDER BY MONTHNAME(date);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

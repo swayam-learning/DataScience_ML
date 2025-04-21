@@ -43,7 +43,7 @@ FROM smartphones_cleaned_v6
 GROUP BY brand_name , processor_brand 
 ORDER BY num_phones desc;
 
--- Q9. Top 5 soctliest phone brands
+-- Q9. Top 5 costliest phone brands
 
 SELECT brand_name, ROUND(AVG(price),2) as avg_price FROM smartphones_cleaned_v6 GROUP BY brand_name 
 ORDER BY avg_price DESC LIMIT 5;
