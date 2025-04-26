@@ -16,7 +16,7 @@ SELECT * FROM (SELECT *,AVG(marks) OVER(PARTITION BY branch) as avg_marks
 WHERE t1.marks > avg_marks;
 
 -- SELECT * FROM marks WHERE marks > (SELECT AVG(marks) OVER(PARTITION BY branch) as avg_marks
---         FROM marks); this query is wring because window functions cannot be directly used inside a where clause
+--         FROM marks); this query is wrong because window functions cannot be directly used inside a where clause
 
 -- Rank/Dense Rank/ Row Number
 
