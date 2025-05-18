@@ -1,3 +1,0 @@
--- window functions
--- it returns row by row result 
--- while group by returns the no of rows same as the no of groups
