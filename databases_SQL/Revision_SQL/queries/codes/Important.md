@@ -7,3 +7,5 @@ limit 10,1
 
 whenever we filter on aggregate columns from the groupby we use having for that
 having is that to groupby , what where is to select
+
+made changes
