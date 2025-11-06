@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER Results</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+</head>
+<body>
+    <h1>Named Entity Recognition Results</h1>
+
+    <div>
+        <h2>NER Results</h2>
+        <ul>
+            {% for provider, data in result.items() %}
+                <li>
+                    <strong>{{ provider }}</strong>
+                    <ul>
+                        {% for entity in data['items'] %}
+                            <li>{{ entity['text'] }} - {{ entity['category'] }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

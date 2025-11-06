@@ -1,0 +1,1 @@
+two pointer apporach is used when we have sorted arrays and we have to work out with sub-arrays

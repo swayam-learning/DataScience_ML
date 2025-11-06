@@ -1,0 +1,48 @@
+Initialization and Representation:
+
+__init__(self, arr): Initializes an instance of the class, typically with an array arr.
+__repr__(self): Defines the string representation of the object, used by repr().
+Numeric Operations:
+
+__add__(self, other): Handles addition (+) with other.
+__sub__(self, other): Handles subtraction (-) with other.
+__mul__(self, other): Handles multiplication (*) with other.
+__truediv__(self, other): Handles true division (/) with other.
+__floordiv__(self, other): Handles floor division (//) with other.
+__mod__(self, other): Handles modulus (%) with other.
+__pow__(self, other[, modulo]): Handles exponentiation (**) with other.
+Comparison Operators:
+
+__eq__(self, other): Defines equality (==) comparison with other.
+__ne__(self, other): Defines non-equality (!=) comparison with other.
+__lt__(self, other): Defines less-than (<) comparison with other.
+__le__(self, other): Defines less-than or equal-to (<=) comparison with other.
+__gt__(self, other): Defines greater-than (>) comparison with other.
+__ge__(self, other): Defines greater-than or equal-to (>=) comparison with other.
+Unary Operators:
+
+__neg__(self): Defines negation (-self).
+__pos__(self): Defines unary plus (+self).
+__abs__(self): Defines absolute value (abs(self)).
+Container Methods:
+
+__len__(self): Defines the length of the object (len(self)).
+__getitem__(self, key): Allows indexing (self[key]).
+__setitem__(self, key, value): Allows assignment to indexed elements (self[key] = value).
+__delitem__(self, key): Allows deletion of indexed elements (del self[key]).
+Iteration and Context Managers:
+
+__iter__(self): Returns an iterator object.
+__next__(self): Defines behavior for iterating over instances (next() function).
+Context Managers:
+
+__enter__(self): Called when entering a context (used with with statement).
+__exit__(self, exc_type, exc_value, traceback): Called when exiting a context.
+Type Conversion:
+
+__int__(self): Converts the object to an integer (int(self)).
+__float__(self): Converts the object to a float (float(self)).
+__str__(self): Converts the object to a string (str(self)).
+Miscellaneous:
+
+__call__(self, *args, **kwargs): Allows the instance to be called as a function (instance()).

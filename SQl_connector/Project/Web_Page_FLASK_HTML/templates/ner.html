@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Named Entity Recognition Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"
+</head>
+<body>
+    <form action="/ner" method="post">
+        <label>Type your text here:</label>
+        <textarea name="text" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Perform NER" class="ner">
+    </form>
+
+    <!-- Display NER results if available -->
+    {% if result %}
+
+    <ul>
+        {% for provider, entities_by_type in result.items() %}
+            <li>
+                <strong>{{ provider }}</strong>
+                <ul>
+                    {% for entity_type, entities in entities_by_type.items() %}
+                        <li>{{ entity_type }}:
+                            <ul>
+                                {% for entity in entities %}
+                                    <li>{{ entity }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Display error message if there's an API error or empty result -->
+    {% if error %}
+    <h2>Error</h2>
+    <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

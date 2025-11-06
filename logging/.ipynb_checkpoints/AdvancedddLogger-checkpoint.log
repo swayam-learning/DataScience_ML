@@ -1,0 +1,6 @@
+2023-12-27 18:53:37,601:__main__:faulty division, do not try dividing any number by zero
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Local\Temp\ipykernel_4384\120464656.py", line 28, in div
+    result = a / b
+             ~~^~~
+ZeroDivisionError: division by zero

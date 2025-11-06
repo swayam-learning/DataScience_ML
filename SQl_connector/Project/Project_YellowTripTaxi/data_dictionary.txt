@@ -1,0 +1,70 @@
+- **VendorID**  
+  Code indicating the TPEP (Taxi Passenger Enhancement Program) provider that supplied the record.  
+  - `1` = Creative Mobile Technologies, LLC  
+  - `2` = VeriFone Inc.
+
+- **tpep_pickup_datetime**  
+  The date and time when the meter was engaged.
+
+- **tpep_dropoff_datetime**  
+  The date and time when the meter was disengaged.
+
+- **Passenger_count**  
+  The number of passengers in the vehicle.  
+  _(Note: This value is entered manually by the driver.)_
+
+- **Trip_distance**  
+  The total trip distance in miles, as reported by the taximeter.
+
+- **PULocationID**  
+  TLC Taxi Zone ID where the meter was engaged.
+
+- **DOLocationID**  
+  TLC Taxi Zone ID where the meter was disengaged.
+
+- **RateCodeID**  
+  The final rate code applied at the end of the trip.
+  - `1` = Standard rate  
+  - `2` = JFK Airport  
+  - `3` = Newark Airport  
+  - `4` = Nassau or Westchester  
+  - `5` = Negotiated fare  
+  - `6` = Group ride  
+
+- **Store_and_fwd_flag**  
+  Indicates if the trip record was held in vehicle memory before being sent to the server.
+  - `Y` = Store and forward trip  
+  - `N` = Not a store and forward trip  
+
+- **Payment_type**  
+  Numeric code representing how the passenger paid for the trip.
+  - `1` = Credit card  
+  - `2` = Cash  
+  - `3` = No charge  
+  - `4` = Dispute  
+  - `5` = Unknown  
+  - `6` = Voided trip  
+
+- **Fare_amount**  
+  The base fare calculated based on time and distance by the meter.
+
+- **Extra**  
+  Additional surcharges, such as rush hour and overnight charges ($0.50 and $1, respectively).
+
+- **MTA_tax**  
+  A $0.50 tax automatically triggered based on the metered rate.
+
+- **Improvement_surcharge**  
+  A $0.30 surcharge levied at the start of each trip, starting in 2015.
+
+- **Tip_amount**  
+  Tips recorded automatically for credit card transactions. _(Cash tips are not included.)_
+
+- **Tolls_amount**  
+  The total amount of tolls paid during the trip.
+
+- **Total_amount**  
+  The total fare charged to passengers, excluding cash tips.
+
+- **Congestion_Surcharge**  
+  The total amount collected for the NYS congestion surcharge during the trip.
